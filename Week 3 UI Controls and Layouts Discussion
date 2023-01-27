@@ -1,0 +1,74 @@
+/**
+ * UI Controls and Layouts - Week 3 - Liz Thron
+ * 
+ */
+package discussion_week3;
+
+import javafx.application.Application;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import javafx.scene.Scene;
+import javafx.scene.control.ComboBox;
+import javafx.scene.control.Label;
+import javafx.scene.control.ListView;
+import javafx.scene.control.ScrollPane;
+import javafx.scene.control.SelectionMode;
+import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.FlowPane;
+import javafx.stage.Stage;
+
+/**
+ *
+ * @author Liz Thron
+ */
+public class Discussion_Week3 extends Application {
+        //Declare an array of States
+        private final String[] states = {"AL", "AZ", "AR", "CA", "CO", "CT",
+                "DE", "FL", "GA", "HI", "ID", "IL", "IN", "IA", "KS", "KY", "LA",
+                "ME", "MD", "MA", "MI", "MN", "MS", "MO", "MT", "NE", "NV", "NH",
+                "NJ", "NM", "NY", "NC", "ND", "OH", "OK", "OR", "PA", "RI", "SC",
+                "SD", "TN", "TX", "UT", "VT", "VA", "WA", "WV", "WI", "WY"};
+        
+                
+        //Create a combo box for selecting states
+        private ComboBox<String> cbo = new ComboBox<>(); //states
+       
+        @Override 
+        public void start(Stage primaryStage){
+            
+            //Add combo box to the border pane
+            BorderPane pane = new BorderPane();
+            BorderPane paneForComboBox = new BorderPane();
+            paneForComboBox.setLeft(new Label ("Select a state: "));
+            paneForComboBox.setCenter(cbo);
+            pane.setTop(paneForComboBox);
+            cbo.setPrefWidth(250);
+            cbo.setValue(" ");
+                        
+            //Create a list view of the states 
+            ListView<String> listView = new ListView<>
+                    (FXCollections.observableArrayList(states));
+            listView.setPrefSize(400, 100);
+            listView.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
+            
+            //Create a flow pane with a scroll bar to hold list view
+            FlowPane imagePane = new FlowPane(10,10);
+            pane.setLeft(new ScrollPane(listView));
+            pane.setCenter(imagePane);
+            ObservableList<String> items = 
+            FXCollections.observableArrayList(states);
+            cbo.getItems().addAll(items);
+                    
+            //Create a scene and place it in the stage
+            Scene scene = new Scene(pane, 450, 170);
+            primaryStage.setTitle("UI Controls and Layout Demo");
+            primaryStage.setScene(scene);
+            primaryStage.show();
+          
+            
+            
+        }
+
+    
+    }
+
